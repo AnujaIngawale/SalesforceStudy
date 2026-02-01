@@ -9,5 +9,5 @@
  NOT(ISPICKVAL(Rating, &apos;Warm&apos;)) 
 )</errorConditionFormula>
     <errorDisplayField>Rating</errorDisplayField>
-    <errorMessage>Account Rating must be Hot or Warm when Annual Revenue is more than 1 million dollar.</errorMessage>
+    <errorMessage>Account Rating must be Hot or Warm when Annual Revenue is more than 2 million dollar.</errorMessage>
 </ValidationRule>
