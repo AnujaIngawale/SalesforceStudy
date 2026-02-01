@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Phone_Limit_Exceeded</fullName>
+    <active>true</active>
+    <errorConditionFormula>LEN(Phone_No__c) &gt; 13  || 
+LEN(Phone_No__c) &lt;10</errorConditionFormula>
+    <errorMessage>Phone No is invalid.</errorMessage>
+</ValidationRule>

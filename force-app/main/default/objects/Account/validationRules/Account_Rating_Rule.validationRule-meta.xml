@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Rating_Rule</fullName>
+    <active>true</active>
+    <description>When Annual Revenue is more than 1M then Rating must be HOT</description>
+    <errorConditionFormula>AND(
+ AnnualRevenue &gt;1000000,
+ NOT(ISPICKVAL(Rating, &apos;Hot&apos;)),
+ NOT(ISPICKVAL(Rating, &apos;Warm&apos;)) 
+)</errorConditionFormula>
+    <errorDisplayField>Rating</errorDisplayField>
+    <errorMessage>Account Rating must be Hot or Warm when Annual Revenue is more than 1 million.</errorMessage>
+</ValidationRule>
