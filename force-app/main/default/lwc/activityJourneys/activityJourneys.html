@@ -1,0 +1,125 @@
+<template>
+    <template if:true={activityJourneys}>
+        <lightning-layout multiple-rows>
+            <template for:each={activityJourneys} for:item="journey">
+                <lightning-layout-item
+                    key={journey.caseId}
+                    size="12"
+                    padding="around-small"
+                >
+                    <lightning-card>
+                        <lightning-button
+                            slot="actions"
+                            label="Update Activity"
+                            variant="brand"
+                            data-id={journey.caseId}
+                            onclick={handleUpdateActivity}
+                        ></lightning-button>
+                        <!-- Header -->
+                        <h2 slot="title">
+                            {journey.fromLocation}
+                            →
+                            {journey.toLocation}
+                        </h2>
+
+                        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+                            <!-- Top Info -->
+                            <lightning-layout vertical-align="center">
+                                <lightning-layout-item size="4">
+                                    <strong>Duration:</strong>
+                                    {journey.activityDuration} mins
+                                </lightning-layout-item>
+
+                                <lightning-layout-item size="4">
+                                    <strong>Driver:</strong>
+                                    {journey.driverName}
+                                </lightning-layout-item>
+
+                                <lightning-layout-item size="4">
+                                    <strong>Vehicle:</strong>
+                                    {journey.vehicleNumber}
+                                </lightning-layout-item>
+                            </lightning-layout>
+
+                            <!-- Journey Locations -->
+                            <div class="slds-m-top_medium">
+                                <h3 class="slds-text-heading_small">
+                                    📍 Journey Locations
+                                </h3>
+
+                                <template if:true={journey.journeyLocations.length}>
+                                    <div class="slds-m-top_x-small">
+                                        <template
+                                            for:each={journey.journeyLocations}
+                                            for:item="loc"
+                                        >
+                                            <lightning-badge
+                                                key={loc.journeyLocationId}
+                                                label={loc.locationName}
+                                                class="slds-m-right_x-small slds-m-bottom_x-small"
+                                            ></lightning-badge>
+                                        </template>
+                                    </div>
+                                </template>
+
+                                <template if:false={journey.journeyLocations.length}>
+                                    <p class="slds-text-color_weak">
+                                        No journey locations
+                                    </p>
+                                </template>
+                            </div>
+
+                            <!-- Fatigue Cases -->
+                            <div class="slds-m-top_medium">
+                                <h3 class="slds-text-heading_small">
+                                    ⚠️ Fatigue Cases
+                                </h3>
+
+                                <template if:true={journey.fatigueCases.length}>
+                                    <lightning-layout
+                                        multiple-rows
+                                        class="slds-m-top_x-small"
+                                    >
+                                        <template for:each={journey.fatigueCases} for:item="fatigue">
+                                            <lightning-layout-item
+                                                key={fatigue.fatigueCaseId}
+                                                size="12"
+                                                class="slds-box slds-m-bottom_x-small"
+                                            >
+                                                <p>
+                                                    <strong>Start:</strong>
+                                                    {fatigue.startTime}
+                                                </p>
+                                                <p>
+                                                    <strong>End:</strong>
+                                                    {fatigue.endTime}
+                                                </p>
+                                                <p>
+                                                    <strong>Duration:</strong>
+                                                    {fatigue.duration} mins
+                                                </p>
+                                            </lightning-layout-item>
+                                        </template>
+                                    </lightning-layout>
+                                </template>
+
+                                <template if:false={journey.fatigueCases.length}>
+                                    <p class="slds-text-color_weak">
+                                        No fatigue cases
+                                    </p>
+                                </template>
+                            </div>
+                        </div>
+                    </lightning-card>
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
+    </template>
+
+    <template if:true={error}>
+        <div class="slds-text-color_error slds-p-around_medium">
+            Something went wrong while loading activity journeys.
+        </div>
+    </template>
+
+</template>
